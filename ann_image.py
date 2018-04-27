@@ -55,8 +55,8 @@ ann = cv2.ml.ANN_MLP_create()
 ann.setLayerSizes(np.array([num_input_neurons, num_hidden_neurons, num_output_neurons], dtype=np.int64))
 ann.setActivationFunction(cv2.ml.ANN_MLP_SIGMOID_SYM)
 ann.setTermCriteria((cv2.TERM_CRITERIA_COUNT | cv2.TERM_CRITERIA_EPS, 1, 0.000001 ))
-ann.setBackpropMomentumScale(0.00001)
-ann.setBackpropWeightScale(0.00001)
+#ann.setBackpropMomentumScale(0.00001)
+#ann.setBackpropWeightScale(0.00001)
 
 img_input_array = sample_img.flatten()
 img_input_array = img_input_array.astype(np.float32)
@@ -74,7 +74,6 @@ img_td = cv2.ml.TrainData_create(img_input_array, cv2.ml.ROW_SAMPLE, img_output_
 ann.train(img_td, cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
 
 for i in range(0, 100):
-
     print(i)
 
     for j in range(0, len(filenames)):
@@ -90,7 +89,7 @@ for i in range(0, 100):
 
         img_input_array = img_input_array.reshape(1, img_input_array.shape[0])
         img_output_array = img_output_array.reshape(1, img_output_array.shape[0])
-        
+
         img_td = cv2.ml.TrainData_create(img_input_array, cv2.ml.ROW_SAMPLE, img_output_array)
         ann.train(img_td, cv2.ml.ANN_MLP_UPDATE_WEIGHTS | cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
 
