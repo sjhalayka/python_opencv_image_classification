@@ -101,8 +101,8 @@ for i in range(0, len(filenames)):
     img_input_array = img_input_array.flatten()
     img_input_array = img_input_array.astype(np.float32)
 
-    for k in range(0, img_input_array.shape[0]):
-        img_input_array[k] = float(img_input_array[k]) / float(255)
+    for j in range(0, img_input_array.shape[0]):
+        img_input_array[j] = float(img_input_array[j]) / float(255)
 
     img_input_array = img_input_array.reshape(1, img_input_array.shape[0])
     
