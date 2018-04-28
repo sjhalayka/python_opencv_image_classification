@@ -41,7 +41,9 @@ for i in range(0, len(classifications)):
         max_class = classifications[i]
 
 num_classes = max_class + 1
-num_bits_needed = math.floor(math.log(num_classes)/math.log(2.0))
+num_bits_needed = math.ceil(math.log(num_classes)/math.log(2.0))
+
+print(num_bits_needed)
 
 # Get image and ANN parameters
 sample_img = cv2.imread(filenames[0])
