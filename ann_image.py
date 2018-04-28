@@ -11,6 +11,12 @@ def add_noise(img_input_array, scale):
         noise = noise / 255.0
         img_input_array[i] = (img_input_array[i] + noise*scale) / (1.0 + scale)
 
+        if img_input_array[i] < 0.0:
+            img_input_array[i] = 0.0
+
+        if img_input_array[i] > 1.0:
+            img_input_array[i] = 1.0
+
     return img_input_array
 
 
