@@ -109,14 +109,18 @@ for i in range(0, 100):
 
 for i in range(0, len(filenames)):
     print(filenames[i])
-    
+
+    # Read  image from file
     img_input_array = cv2.imread(filenames[i])
     img_input_array = img_input_array.flatten()
     img_input_array = img_input_array.astype(np.float32)
 
+    # Normalize all pixels from [0, 255] to [0, 1]
     for j in range(0, img_input_array.shape[0]):
         img_input_array[j] = float(img_input_array[j]) / float(255)
 
+    # Make input image have 1 row, many columns
     img_input_array = img_input_array.reshape(1, img_input_array.shape[0])
-    
+
+    # Ask the network to classify the image
     print(ann.predict(img_input_array))
