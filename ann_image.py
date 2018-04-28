@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import math
 
-
+# A function that takes an integer and gives the bit numpy array
 def get_bits_for_int(src_min_bits, src_number):
     bits = bin(src_number)[2:]
 
@@ -23,6 +23,7 @@ def get_bits_for_int(src_min_bits, src_number):
     return a
 
 
+# Read file list
 file = open("files.txt", "r") 
 
 filenames = []
@@ -32,6 +33,7 @@ for line in file:
     filenames.append(line.split(" ")[0])
     classifications.append(int(line.split(" ")[1]))
 
+# Get the maximum classification number
 max_class = 0
 
 for i in range(0, len(classifications)):
@@ -41,6 +43,7 @@ for i in range(0, len(classifications)):
 num_classes = max_class + 1
 num_bits_needed = math.floor(math.log(num_classes)/math.log(2.0))
 
+# Get image and ANN parameters
 sample_img = cv2.imread(filenames[0])
 
 img_rows = sample_img.shape[0]
@@ -58,18 +61,23 @@ ann.setTermCriteria((cv2.TERM_CRITERIA_COUNT | cv2.TERM_CRITERIA_EPS, 1, 0.00000
 #ann.setBackpropMomentumScale(0.00001)
 #ann.setBackpropWeightScale(0.00001)
 
+# Read image from file
 img_input_array = sample_img.flatten()
 img_input_array = img_input_array.astype(np.float32)
 
+# Normalize all pixels from [0, 255] to [0, 1]
 for i in range(0, img_input_array.shape[0]):
     img_input_array[i] = float(img_input_array[i]) / float(255)
 
+# Get output image
 img_output_array = get_bits_for_int(num_output_neurons, classifications[0])
 img_output_array = img_output_array.astype(np.float32)
 
+# Make both images have 1 row, many columns
 img_input_array = img_input_array.reshape(1, img_input_array.shape[0])
 img_output_array = img_output_array.reshape(1, img_output_array.shape[0])
 
+# Train the network
 img_td = cv2.ml.TrainData_create(img_input_array, cv2.ml.ROW_SAMPLE, img_output_array)
 ann.train(img_td, cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
 
@@ -77,19 +85,25 @@ for i in range(0, 100):
     print(i)
 
     for j in range(0, len(filenames)):
+
+        # Read image from file
         img_input_array = cv2.imread(filenames[j])
         img_input_array = img_input_array.flatten()
         img_input_array = img_input_array.astype(np.float32)
 
+        # Normalize all pixels from [0, 255] to [0, 1]
         for k in range(0, img_input_array.shape[0]):
             img_input_array[k] = float(img_input_array[k]) / float(255)
 
+        # Get output image
         img_output_array = get_bits_for_int(num_output_neurons, classifications[j])
         img_output_array = img_output_array.astype(np.float32)
 
+        # Make both images have 1 row, many columns
         img_input_array = img_input_array.reshape(1, img_input_array.shape[0])
         img_output_array = img_output_array.reshape(1, img_output_array.shape[0])
 
+        # Train the network
         img_td = cv2.ml.TrainData_create(img_input_array, cv2.ml.ROW_SAMPLE, img_output_array)
         ann.train(img_td, cv2.ml.ANN_MLP_UPDATE_WEIGHTS | cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
 
