@@ -1,6 +1,24 @@
 import cv2
 import numpy as np
 import math
+import random
+
+
+
+def add_noise(img_input_array, scale):
+    for i in range(0, img_input_array.shape[0]):
+        noise = float(random.randint(0, 255))   
+        noise = noise / 255.0
+        img_input_array[i] = (img_input_array[i] + noise*scale) / (1.0 + scale)
+
+        if img_input_array[i] < 0:
+            img_input_array[i] = 0
+
+        if img_input_array[i] > 1:
+            img_input_array[i] = 1
+
+    return img_input_array
+
 
 # A function that takes an integer and gives the bit numpy array
 def get_bits_for_int(src_min_bits, src_number):
@@ -60,8 +78,8 @@ ann = cv2.ml.ANN_MLP_create()
 ann.setLayerSizes(np.array([num_input_neurons, num_hidden_neurons, num_output_neurons], dtype=np.int64))
 ann.setActivationFunction(cv2.ml.ANN_MLP_SIGMOID_SYM)
 ann.setTermCriteria((cv2.TERM_CRITERIA_COUNT | cv2.TERM_CRITERIA_EPS, 1, 0.000001 ))
-#ann.setBackpropMomentumScale(0.00001)
-#ann.setBackpropWeightScale(0.00001)
+ann.setBackpropMomentumScale(0.00001)
+ann.setBackpropWeightScale(0.00001)
 
 # Read image from file
 img_input_array = sample_img.flatten()
@@ -84,7 +102,7 @@ img_td = cv2.ml.TrainData_create(img_input_array, cv2.ml.ROW_SAMPLE, img_output_
 ann.train(img_td, cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
 
 # For each training iteration
-for i in range(0, 10):
+for i in range(0, 100):
     print(i)
 
     # For each file
@@ -99,6 +117,8 @@ for i in range(0, 10):
         for k in range(0, img_input_array.shape[0]):
             img_input_array[k] = float(img_input_array[k]) / float(255)
 
+        #img_input_array = add_noise(img_input_array, 0.1)
+        
         # Get output image
         img_output_array = get_bits_for_int(num_output_neurons, classifications[j])
         img_output_array = img_output_array.astype(np.float32)
