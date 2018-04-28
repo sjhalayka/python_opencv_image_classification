@@ -11,12 +11,6 @@ def add_noise(img_input_array, scale):
         noise = noise / 255.0
         img_input_array[i] = (img_input_array[i] + noise*scale) / (1.0 + scale)
 
-        if img_input_array[i] < 0:
-            img_input_array[i] = 0
-
-        if img_input_array[i] > 1:
-            img_input_array[i] = 1
-
     return img_input_array
 
 
@@ -102,7 +96,7 @@ img_td = cv2.ml.TrainData_create(img_input_array, cv2.ml.ROW_SAMPLE, img_output_
 ann.train(img_td, cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
 
 # For each training iteration
-for i in range(0, 100):
+for i in range(0, 1000):
     print(i)
 
     # For each file
@@ -117,7 +111,8 @@ for i in range(0, 100):
         for k in range(0, img_input_array.shape[0]):
             img_input_array[k] = float(img_input_array[k]) / float(255)
 
-        #img_input_array = add_noise(img_input_array, 0.1)
+        # Add noise to input image
+        img_input_array = add_noise(img_input_array, 0.1)
         
         # Get output image
         img_output_array = get_bits_for_int(num_output_neurons, classifications[j])
@@ -143,6 +138,9 @@ for i in range(0, len(filenames)):
     # Normalize all pixels from [0, 255] to [0, 1]
     for j in range(0, img_input_array.shape[0]):
         img_input_array[j] = float(img_input_array[j]) / float(255)
+
+    # Add noise to input image
+    img_input_array = add_noise(img_input_array, 0.1)
 
     # Make input image have 1 row, many columns
     img_input_array = img_input_array.reshape(1, img_input_array.shape[0])
