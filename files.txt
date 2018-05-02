@@ -1,4 +1,0 @@
-dove.png 0
-flowers.png 1
-peacock.png 2
-statue.png 3
