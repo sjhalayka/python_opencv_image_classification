@@ -3,23 +3,7 @@ import numpy as np
 import math
 import random
 
-
-
-def add_noise(img_input_array, scale):
-    for i in range(0, img_input_array.shape[0]):
-        noise = float(random.randint(0, 255))   
-        noise = noise / 255.0
-        img_input_array[i] = (img_input_array[i] + noise*scale) / (1.0 + scale)
-
-        if img_input_array[i] < 0.0:
-            img_input_array[i] = 0.0
-
-        if img_input_array[i] > 1.0:
-            img_input_array[i] = 1.0
-
-    return img_input_array
-
-
+# function that takes a bit numpy array and gives an integer
 def get_int_for_bits(src_bits):
 
     answer = 0
@@ -59,6 +43,7 @@ def get_bits_for_int(src_min_bits, src_number):
 
 def snapto(position):
 
+    # clamp
     if position < 0:
         position = 0
 
