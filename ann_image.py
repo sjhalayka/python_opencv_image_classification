@@ -117,7 +117,7 @@ img_td = cv2.ml.TrainData_create(img_input_array, cv2.ml.ROW_SAMPLE, img_output_
 ann.train(img_td, cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
 
 # For each training iteration
-for i in range(0, 2):
+for i in range(0, 100):
     print(i)
 
     # For each file
@@ -196,6 +196,5 @@ for i in range(0, len(test_filenames)):
 
 
 print(float(ok_count) / float(error_count + ok_count))
-    
 
-    
+
