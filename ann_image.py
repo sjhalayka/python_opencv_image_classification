@@ -57,19 +57,19 @@ def snapto(position):
 # Read file list
 file = open("training_files.txt", "r") 
 
-filenames = []
-classifications = []
+training_filenames = []
+training_classifications = []
 
 for line in file:
-    filenames.append(line.split(" ")[0])
-    classifications.append(int(line.split(" ")[1]))
+    training_filenames.append(line.split(" ")[0])
+    training_classifications.append(int(line.split(" ")[1]))
 
 # Get the maximum classification number
 max_class = 0
 
-for i in range(0, len(classifications)):
-    if classifications[i] > max_class:
-        max_class = classifications[i]
+for i in range(0, len(training_classifications)):
+    if training_classifications[i] > max_class:
+        max_class = training_classifications[i]
 
 num_classes = max_class + 1
 
@@ -77,7 +77,7 @@ num_classes = max_class + 1
 num_bits_needed = math.ceil(math.log(num_classes)/math.log(2.0))
 
 # Get image and ANN parameters
-sample_img = cv2.imread(filenames[0])
+sample_img = cv2.imread(training_filenames[0])
 sample_img = cv2.resize(sample_img, (64, 64))
 
 img_rows = sample_img.shape[0]
@@ -105,7 +105,7 @@ for i in range(0, img_input_array.shape[0]):
     img_input_array[i] = float(img_input_array[i]) / float(255)
 
 # Get output image
-img_output_array = get_bits_for_int(num_output_neurons, classifications[0])
+img_output_array = get_bits_for_int(num_output_neurons, training_classifications[0])
 img_output_array = img_output_array.astype(np.float32)
 
 # Make both images have 1 row, many columns
@@ -117,16 +117,16 @@ img_td = cv2.ml.TrainData_create(img_input_array, cv2.ml.ROW_SAMPLE, img_output_
 ann.train(img_td, cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
 
 # For each training iteration
-for i in range(0, 1000):
+for i in range(0, 2):
     print(i)
 
     # For each file
-    for j in range(0, len(filenames)):
+    for j in range(0, len(training_filenames)):
 
         #print(filenames[j])
 
         # Read image from file
-        img_input_array = cv2.imread(filenames[j])
+        img_input_array = cv2.imread(training_filenames[j])
         img_input_array = cv2.resize(img_input_array, (64, 64))
         img_input_array = img_input_array.flatten()
         img_input_array = img_input_array.astype(np.float32)
@@ -136,7 +136,7 @@ for i in range(0, 1000):
             img_input_array[k] = float(img_input_array[k]) / float(255)
 
         # Get output image
-        img_output_array = get_bits_for_int(num_output_neurons, classifications[j])
+        img_output_array = get_bits_for_int(num_output_neurons, training_classifications[j])
         img_output_array = img_output_array.astype(np.float32)
 
         # Make both images have 1 row, many columns
