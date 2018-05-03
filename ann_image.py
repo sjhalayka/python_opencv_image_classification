@@ -112,11 +112,11 @@ img_output_array = img_output_array.astype(np.float32)
 img_input_array = img_input_array.reshape(1, img_input_array.shape[0])
 img_output_array = img_output_array.reshape(1, img_output_array.shape[0])
 
-# Train the network
+# Train the network once, to pull up by the bootstraps
 img_td = cv2.ml.TrainData_create(img_input_array, cv2.ml.ROW_SAMPLE, img_output_array)
 ann.train(img_td, cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
 
-# For each training iteration
+# For each training iteration, update the weights
 for i in range(0, 100):
     print(i)
 
