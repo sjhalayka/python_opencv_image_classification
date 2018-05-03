@@ -55,12 +55,12 @@ def snapto(position):
 
 
 # Read file list
-file = open("training_files.txt", "r") 
+training_file = open("training_files.txt", "r") 
 
 training_filenames = []
 training_classifications = []
 
-for line in file:
+for line in training_file:
     training_filenames.append(line.split(" ")[0])
     training_classifications.append(int(line.split(" ")[1]))
 
