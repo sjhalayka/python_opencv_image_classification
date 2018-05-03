@@ -18,8 +18,6 @@ def get_int_for_bits(src_bits):
         
     return answer
 
-    
-
 # A function that takes an integer and gives the bit numpy array
 def get_bits_for_int(src_min_bits, src_number):
     bits = bin(src_number)[2:]
@@ -40,7 +38,6 @@ def get_bits_for_int(src_min_bits, src_number):
 
     return a
 
-
 def snapto(position):
 
     # clamp
@@ -52,6 +49,10 @@ def snapto(position):
 
     # round
     return math.floor(0.5 + position)
+
+
+
+
 
 
 # Read training file list
