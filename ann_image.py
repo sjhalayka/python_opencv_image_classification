@@ -117,7 +117,7 @@ img_output_array = img_output_array.reshape(1, img_output_array.shape[0])
 img_td = cv2.ml.TrainData_create(img_input_array, cv2.ml.ROW_SAMPLE, img_output_array)
 ann.train(img_td, cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
 
-# For each training iteration, update the weights
+# For each further training iteration, update the weights
 for i in range(0, 100):
     print(i)
 
