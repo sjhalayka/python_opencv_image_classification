@@ -55,7 +55,7 @@ def snapto(position):
 
 
 
-# Read training file list
+# Read training file/classification list
 training_file = open("training_files.txt", "r") 
 
 training_filenames = []
@@ -152,7 +152,7 @@ for i in range(0, 100):
 
 
 
-# Read testing file list
+# Read testing file/classification list
 test_file = open("test_files.txt", "r") 
 
 test_filenames = []
