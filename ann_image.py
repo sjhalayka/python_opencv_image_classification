@@ -144,7 +144,7 @@ for i in range(0, 100):
         img_input_array = img_input_array.reshape(1, img_input_array.shape[0])
         img_output_array = img_output_array.reshape(1, img_output_array.shape[0])
 
-        # Train the network
+        # Train the network, using the update weights parameter
         img_td = cv2.ml.TrainData_create(img_input_array, cv2.ml.ROW_SAMPLE, img_output_array)
         ann.train(img_td, cv2.ml.ANN_MLP_UPDATE_WEIGHTS | cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
 
