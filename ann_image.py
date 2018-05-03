@@ -3,6 +3,7 @@ import numpy as np
 import math
 import random
 
+
 # function that takes a bit numpy array and gives an integer
 def get_int_for_bits(src_bits):
 
@@ -17,6 +18,7 @@ def get_int_for_bits(src_bits):
         shifted = shifted << 1
         
     return answer
+
 
 # A function that takes an integer and gives a bit numpy array
 def get_bits_for_int(src_min_bits, src_number):
@@ -38,6 +40,7 @@ def get_bits_for_int(src_min_bits, src_number):
 
     return a
 
+
 def snapto(position):
 
     # clamp
@@ -49,8 +52,6 @@ def snapto(position):
 
     # round
     return math.floor(0.5 + position)
-
-
 
 
 
@@ -148,10 +149,9 @@ for i in range(0, 100):
         img_td = cv2.ml.TrainData_create(img_input_array, cv2.ml.ROW_SAMPLE, img_output_array)
         ann.train(img_td, cv2.ml.ANN_MLP_UPDATE_WEIGHTS | cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
 
-
-
-
-
+        
+        
+        
 # Read testing file/classification list
 test_file = open("test_files.txt", "r") 
 
