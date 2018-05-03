@@ -164,7 +164,7 @@ for line in test_file:
 error_count = 0
 ok_count = 0
 
-# For each file in the test data (replace with your own filenames/classifications)
+# For each file in the test data
 for i in range(0, len(test_filenames)):
     print(test_filenames[i])
 
