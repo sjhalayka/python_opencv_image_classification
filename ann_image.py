@@ -4,7 +4,9 @@ import math
 import random
 
 
-# function that takes a bit numpy array and gives an integer
+
+
+# A function that takes a bit numpy array and gives an integer
 def get_int_for_bits(src_bits):
 
     answer = 0
@@ -77,6 +79,8 @@ def shuffle(filenames, classifications, num_swaps):
 
 
 
+
+# Step 1 -- Train the network
 
 # Read training file/classification list
 training_file = open("training_files.txt", "r") 
@@ -177,6 +181,8 @@ for i in range(0, 100):
         
         
         
+# Step 2 -- Test the network
+
 # Read testing file/classification list
 test_file = open("test_files.txt", "r") 
 
