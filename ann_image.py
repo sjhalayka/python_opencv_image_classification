@@ -66,6 +66,8 @@ for line in training_file:
     training_filenames.append(line.split(" ")[0])
     training_classifications.append(int(line.split(" ")[1]))
 
+# It would be a good idea to pseudorandomly shuffle the filenames/classifications here...
+    
 # Get the maximum classification number
 max_class = 0
 
@@ -162,6 +164,8 @@ for line in test_file:
     test_filenames.append(line.split(" ")[0])
     test_classifications.append(int(line.split(" ")[1]))
 
+# It would be a good idea to pseudorandomly shuffle the filenames/classifications here...
+    
 error_count = 0
 ok_count = 0
 
