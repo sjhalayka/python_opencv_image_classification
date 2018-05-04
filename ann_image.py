@@ -112,7 +112,7 @@ channels_per_pixel = 3
 
 num_input_neurons = int(img_rows*img_cols*channels_per_pixel)
 num_output_neurons = int(num_bits_needed)
-num_hidden_neurons = int(math.floor(math.sqrt(num_input_neurons*num_output_neurons)))
+num_hidden_neurons = int(math.ceil(math.sqrt(num_input_neurons*num_output_neurons)))
 
 ann = cv2.ml.ANN_MLP_create()
 ann.setLayerSizes(np.array([num_input_neurons, num_hidden_neurons, num_output_neurons], dtype=np.int64))
