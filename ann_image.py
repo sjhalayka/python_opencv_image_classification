@@ -73,6 +73,8 @@ def shuffle(filenames, classifications, num_swaps):
     return filenames, classifications
 
 
+
+
 # Read training file/classification list
 training_file = open("training_files.txt", "r") 
 
