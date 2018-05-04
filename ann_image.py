@@ -53,6 +53,8 @@ def snapto(position):
     # round
     return math.floor(0.5 + position)
 
+
+# a function to shuffle the filenames/classifications
 def shuffle(filenames, classifications, num_swaps):
 
     length = len(filenames)
