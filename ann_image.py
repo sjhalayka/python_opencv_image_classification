@@ -53,7 +53,24 @@ def snapto(position):
     # round
     return math.floor(0.5 + position)
 
+def shuffle(filenames, classifications, num_swaps):
 
+    length = len(filenames)
+
+    for i in range(0, num_swaps):
+        index0 = random.randint(0, length - 1)
+        index1 = random.randint(0, length - 1)
+
+        temp_filename = filenames[index0]
+        temp_classification = classifications[index0]
+        
+        filenames[index0] = filenames[index1]
+        classifications[index0] = classifications[index1]
+
+        filenames[index1] = temp_filename
+        classifications[index1] = temp_classification
+
+    return filenames, classifications
 
 
 # Read training file/classification list
@@ -66,8 +83,9 @@ for line in training_file:
     training_filenames.append(line.split(" ")[0])
     training_classifications.append(int(line.split(" ")[1]))
 
-# It would be a good idea to pseudorandomly shuffle the filenames/classifications here...
-    
+# It is a good idea to pseudorandomly shuffle the filenames/classifications here...
+training_filenames, training_classifications = shuffle(training_filenames, training_classifications, len(training_filenames)*len(training_filenames))
+
 # Get the maximum classification number
 max_class = 0
 
@@ -121,7 +139,7 @@ img_td = cv2.ml.TrainData_create(img_input_array, cv2.ml.ROW_SAMPLE, img_output_
 ann.train(img_td, cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
 
 # For each further training iteration, update the weights
-for i in range(0, 100):
+for i in range(0, 1):
     print(i)
 
     # For each file in the training data
@@ -164,8 +182,6 @@ for line in test_file:
     test_filenames.append(line.split(" ")[0])
     test_classifications.append(int(line.split(" ")[1]))
 
-# It would be a good idea to pseudorandomly shuffle the filenames/classifications here...
-    
 error_count = 0
 ok_count = 0
 
