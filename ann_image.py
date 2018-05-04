@@ -92,7 +92,7 @@ for line in training_file:
     training_filenames.append(line.split(" ")[0])
     training_classifications.append(int(line.split(" ")[1]))
 
-# It is a good idea to pseudorandomly shuffle the filenames/classifications here...
+# It might be a good idea to pseudorandomly shuffle the filenames/classifications
 training_filenames, training_classifications = shuffle(training_filenames, training_classifications, len(training_filenames)*len(training_filenames))
 
 # Get the maximum classification number
