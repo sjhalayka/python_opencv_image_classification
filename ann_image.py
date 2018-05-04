@@ -41,6 +41,7 @@ def get_bits_for_int(src_min_bits, src_number):
     return a
 
 
+# A function to snap a floating point value to 0.0 or 1.0
 def snapto(position):
 
     # clamp
@@ -54,7 +55,7 @@ def snapto(position):
     return math.floor(0.5 + position)
 
 
-# a function to shuffle the filenames/classifications
+# A function to shuffle the filenames/classifications
 def shuffle(filenames, classifications, num_swaps):
 
     length = len(filenames)
