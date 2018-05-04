@@ -216,7 +216,7 @@ for i in range(0, len(test_filenames)):
     # Ask the network to classify the image
     prediction = ann.predict(img_input_array)
 
-    # snap prediction contentss to 0.0s or 1.0s
+    # snap prediction contents to 0.0s or 1.0s
     for j in range(0, len(prediction[1][0])):
         prediction[1][0][j] = snapto_0_or_1(prediction[1][0][j])
 
