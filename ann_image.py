@@ -44,7 +44,7 @@ def get_bits_for_int(src_min_bits, src_number):
 
 
 # A function to snap a floating point value to 0.0 or 1.0
-def snapto(position):
+def snapto_0_or_1(position):
 
     # clamp
     if position < 0:
@@ -218,7 +218,7 @@ for i in range(0, len(test_filenames)):
 
     # snap prediction to 0 or 1
     for j in range(0, len(prediction[1][0])):
-        prediction[1][0][j] = snapto(prediction[1][0][j])
+        prediction[1][0][j] = snapto_0_or_1(prediction[1][0][j])
 
     # if the classifications are not a match, then there is error
     if int(test_classifications[i]) != get_int_for_bits(prediction[1][0]):
