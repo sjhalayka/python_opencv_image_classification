@@ -82,6 +82,15 @@ def shuffle(filenames, classifications, num_swaps):
 
 # Step 1 -- Train the network
 
+# Read in the labels for future use
+labels_file = open("meta/labels.txt", "r")
+
+labels = []
+
+for line in labels_file:
+    labels_string = line.split("\n")[0]
+    labels.append(labels_string)
+
 # Read training file/classification list
 training_file = open("training_files.txt", "r") 
 
@@ -151,7 +160,7 @@ img_td = cv2.ml.TrainData_create(img_input_array, cv2.ml.ROW_SAMPLE, img_output_
 ann.train(img_td, cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
 
 # For each further training iteration, update the weights
-for i in range(0, 100):
+for i in range(0, 1):
     print(i)
 
     # For each file in the training data
@@ -225,8 +234,10 @@ for i in range(0, len(test_filenames)):
 
     # if the classifications are not a match, then there is error
     if int(test_classifications[i]) != get_int_for_bits(prediction[1][0]):
+        print(labels[int(test_classifications[i])] + " does not equal prediction " + labels[get_int_for_bits(prediction[1][0])])            
         error_count += 1
     else:
+        print(labels[int(test_classifications[i])] + " equals prediction " + labels[get_int_for_bits(prediction[1][0])])    
         ok_count += 1
 
 
