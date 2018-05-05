@@ -82,15 +82,6 @@ def shuffle(filenames, classifications, num_swaps):
 
 # Step 1 -- Train the network
 
-# Read in the labels for future use
-labels_file = open("meta/labels.txt", "r")
-
-labels = []
-
-for line in labels_file:
-    labels_string = line.split("\n")[0]
-    labels.append(labels_string)
-
 # Read training file/classification list
 training_file = open("training_files.txt", "r") 
 
@@ -195,6 +186,15 @@ for i in range(0, 1):
         
 # Step 2 -- Test the network
 
+# Read in the labels for future use
+labels_file = open("meta/labels.txt", "r")
+
+labels = []
+
+for line in labels_file:
+    labels_string = line.split("\n")[0]
+    labels.append(labels_string)
+
 # Read testing file/classification list
 test_file = open("test_files.txt", "r") 
 
@@ -210,7 +210,8 @@ ok_count = 0
 
 # For each file in the test data
 for i in range(0, len(test_filenames)):
-    print(test_filenames[i])
+
+    #print(test_filenames[i])
 
     # Read image from file
     img_input_array = cv2.imread(test_filenames[i])
@@ -234,10 +235,10 @@ for i in range(0, len(test_filenames)):
 
     # if the classifications are not a match, then there is error
     if int(test_classifications[i]) != get_int_for_bits(prediction[1][0]):
-        print(labels[int(test_classifications[i])] + " does not equal prediction " + labels[get_int_for_bits(prediction[1][0])])            
+        print(labels[int(test_classifications[i])] + " != " + labels[get_int_for_bits(prediction[1][0])])            
         error_count += 1
     else:
-        print(labels[int(test_classifications[i])] + " equals prediction " + labels[get_int_for_bits(prediction[1][0])])    
+        print(labels[int(test_classifications[i])] + " == " + labels[get_int_for_bits(prediction[1][0])])    
         ok_count += 1
 
 
