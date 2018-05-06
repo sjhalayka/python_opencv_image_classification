@@ -245,10 +245,10 @@ for i in range(0, len(test_filenames)):
     
     # if the classifications are not a match, then there is error
     if classification_int != prediction_int:
-        print(labels[classification_int] + " != " + labels[prediction_int])            
+        print("Error: " + labels[classification_int] + " != " + labels[prediction_int])            
         error_count += 1
     else:
-        print(labels[classification_int] + " == " + labels[prediction_int])    
+        print("OK: " + labels[classification_int] + " == " + labels[prediction_int])    
         ok_count += 1
 
 
