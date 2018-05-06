@@ -239,7 +239,7 @@ for i in range(0, len(test_filenames)):
 
     # Sanity check
     if prediction_int > max_class:
-        print("Prediction out of bounds")
+        print("Prediction " + str(prediction_int) + " out of bounnds: max_class = " + str(max_class))
         continue
     
     # if the classifications are not a match, then there is error
