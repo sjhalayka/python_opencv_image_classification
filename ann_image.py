@@ -240,7 +240,7 @@ for i in range(0, len(test_filenames)):
     # Sanity check
     # This could be avoided by using one-hot encoding
     if prediction_int > max_class:
-        print("Prediction " + str(prediction_int) + " out of bounnds: max_class = " + str(max_class))
+        print("Prediction " + str(prediction_int) + " out of bounds: max_class = " + str(max_class))
         error_count += 1
         continue
     
