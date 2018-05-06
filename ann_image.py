@@ -244,7 +244,8 @@ for i in range(0, len(test_filenames)):
         error_count += 1
         continue
     
-    # if the classifications are not a match, then there is error
+    # if the classifications are sane, but not a match, then there is error
+    # else it's all good
     if classification_int != prediction_int:
         print("Error: " + labels[classification_int] + " != " + labels[prediction_int])            
         error_count += 1
