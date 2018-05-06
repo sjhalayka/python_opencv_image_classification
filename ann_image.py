@@ -151,7 +151,7 @@ img_td = cv2.ml.TrainData_create(img_input_array, cv2.ml.ROW_SAMPLE, img_output_
 ann.train(img_td, cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
 
 # For each further training iteration, update the weights
-for i in range(0, 100):
+for i in range(0, 1):
     print(i)
 
     # For each file in the training data
@@ -233,12 +233,21 @@ for i in range(0, len(test_filenames)):
     for j in range(0, len(prediction[1][0])):
         prediction[1][0][j] = snapto_0_or_1(prediction[1][0][j])
 
+    # Convert to int
+    prediction_int = get_int_for_bits(prediction[1][0])
+    classification_int = int(test_classifications[i])
+
+    # Sanity check
+    if prediction_int > max_class:
+        print("Prediction out of bounds")
+        continue
+    
     # if the classifications are not a match, then there is error
-    if int(test_classifications[i]) != get_int_for_bits(prediction[1][0]):
-        print(labels[int(test_classifications[i])] + " != " + labels[get_int_for_bits(prediction[1][0])])            
+    if classification_int != prediction_int:
+        print(labels[classification_int] + " != " + labels[prediction_int])            
         error_count += 1
     else:
-        print(labels[int(test_classifications[i])] + " == " + labels[get_int_for_bits(prediction[1][0])])    
+        print(labels[classification_int] + " == " + labels[prediction_int])    
         ok_count += 1
 
 
