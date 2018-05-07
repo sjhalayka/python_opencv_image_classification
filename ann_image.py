@@ -157,8 +157,6 @@ for i in range(0, 1000):
     # For each file in the training data
     for j in range(0, len(training_filenames)):
 
-        #print(filenames[j])
-
         # Read image from file
         img_input_array = cv2.imread(training_filenames[j])
         img_input_array = cv2.resize(img_input_array, (64, 64))
