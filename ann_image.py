@@ -151,7 +151,7 @@ img_td = cv2.ml.TrainData_create(img_input_array, cv2.ml.ROW_SAMPLE, img_output_
 ann.train(img_td, cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
 
 # For each further training iteration, update the weights
-for i in range(0, 1000):
+for i in range(0, 10):
     print(i)
 
     # For each file in the training data
@@ -236,7 +236,7 @@ for i in range(0, len(test_filenames)):
     # Sanity check
     # This could be avoided by using one-hot encoding
     if prediction_int > max_class:
-        print("Prediction " + str(prediction_int) + " out of bounds: max_class = " + str(max_class))
+        print("Error: prediction " + str(prediction_int) + " out of bounds: max_class = " + str(max_class))
         error_count += 1
         continue
     
