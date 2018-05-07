@@ -209,8 +209,6 @@ ok_count = 0
 # For each file in the test data
 for i in range(0, len(test_filenames)):
 
-    #print(test_filenames[i])
-
     # Read image from file
     img_input_array = cv2.imread(test_filenames[i])
     img_input_array = cv2.resize(img_input_array, (64, 64))
