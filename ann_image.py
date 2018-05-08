@@ -82,9 +82,6 @@ def shuffle(filenames, classifications, num_swaps):
 
 # Step 1 -- Train the network
 
-# Seed the pseudorandom number generator
-random.seed(1)
-
 # Read training file/classification list
 training_file = open("training_files.txt", "r") 
 
@@ -97,6 +94,7 @@ for line in training_file:
 
 # It might be a good idea to pseudorandomly shuffle the filenames/classifications
 # This uses an O(n) algorithm to shuffle -- using the length
+random.seed(1)
 training_filenames, training_classifications = shuffle(training_filenames,
                                                        training_classifications,
                                                        len(training_filenames))
